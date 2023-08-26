@@ -23,7 +23,7 @@ public class AppConfig {
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests(Authorize->Authorize.requestMatchers("/api/**").authenticated().anyRequest().permitAll())
-                .addFilterBefore(null, null)
+                .addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class)
                 .csrf().disable()
                 .cors().configurationSource(new CorsConfigurationSource() {
                     @Override
